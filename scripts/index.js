@@ -33,7 +33,10 @@ CONTENEDOR_NOTAS.id = 'contenedorNotas'
 CONTENEDOR_EVENTOS.id = 'contenedorEventos'
 NADA_CREADO.id = 'nadaCreado'
 
-mostrarNotas()
+window.onload = () => {
+    window.location = '/#notas'
+    mostrarNotas()
+}
 
 document.onkeydown = ({ altKey, keyCode }) => {
     if (altKey == true && keyCode == 78) {
@@ -251,11 +254,6 @@ function guardar(datosGuardar) {
     }
 }
 function mostrarNotas() {
-    // window.location.host === "127.0.0.1:5500" ? 
-    window.location = '/#notas' 
-    // : 
-    // window.location = 'https://agustinconcollato.github.io/EventNote/#notas'
-
 
     notas = JSON.parse(localStorage.getItem('nota')) || []
     CONTENEDOR_NOTAS.innerHTML = ''
