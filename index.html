@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Note</title>
+    <link rel="stylesheet" href="estilos/estilos.css">
+    <link rel="shortcut icon" href="multimedia/img/285636_book_icon.svg" type="image/x-icon">
+    <script src="scripts/font-awesome.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <svg height="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path class="parte1" d="M3 8v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8H3z"></path>
+                <path d="M3 7v13c0 1.1.895 2 2 2h14c1.105 0 2-.9 2-2V7H3z" fill="#ecf0f1" class="fill-ecf0f1"></path>
+                <path d="M3 6v13c0 1.1.895 2 2 2h14c1.105 0 2-.9 2-2V6H3z" fill="#bdc3c7" class="fill-bdc3c7"></path>
+                <path d="M3 5v13c0 1.1.895 2 2 2h14c1.105 0 2-.9 2-2V5H3z" fill="#ecf0f1" class="fill-ecf0f1"></path>
+                <path class="parte1" d="M5 1a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h2v-1H5.5a1.5 1.5 0 0 1 0-3H19a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H5z"></path>
+                <path class="parte2" d="M8 1v18h11a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H8z" ></path>
+            </svg>             
+            <h1>Event<span>Note</span></h1>
+        </div>
+        <div class="opcionesGenerales">
+            <div class="agregar">
+                <div id="agregar"><span>CREAR</span><span class="fas fa-plus"></span></div>
+                <div id="agregarOpciones">
+                    <a href="#crearNotaNueva"><button>Nota <span>Alt + N</span></button></a>
+                    <a href="#crearEventoNuevo"><button>Evento <span>Alt + E</span></button></a>
+                </div>
+            </div>
+            <div id="configuracion">
+                <i class="fas fa-cog"></i>
+                <div id="configuracionOpciones">
+                    <a href="#temas"><button>Temas</button></a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <aside>
+            <nav>
+                <ul>
+                    <li><a href="#notas" class="seccionActual" id="seccionNotas"><i class="far fa-sticky-note"></i>Notas</a></li>
+                    <li><a href="#eventos" id="seccionEventos"><i class="far fa-calendar-check"></i>Eventos</a></li>
+                </ul>
+            </nav>
+            <div class="contenedorSeccionLateral">
+                <h3>Categorías de eventos <i class="fas fa-plus" id="nuevaCategoria"></i></h3>
+                <div id="contenedorCategoriasLaterales">
+                </div>
+                <form id="formNuevaCategoria">
+                    <input type="text" id="nombreCategoria" placeholder="Nombre de la categoría" autocomplete="off">
+                    <span id="cantidadCaracteres">0/12</span>
+                    <div class="coloresCategoria">
+                        <div id="coloresPorDefecto">
+                            <button type="button" value="#ffb900" style="background: #ffb900;"></button>
+                            <button type="button" value="#e74856" style="background: #e74856;"></button>
+                            <button type="button" value="#0078d7" style="background: #0078d7;"></button>
+                            <button type="button" value="#00b7c3" style="background: #00b7c3;"></button>
+                        </div>
+                        <div class="contenedorColorPersonalizado contenedorSpanAviso">
+                            <i class="fas fa-palette"></i>
+                            <input type="color" id="colorPersonalizado">
+                            <span class="spanAviso">Personalizado</span>
+                        </div>
+                        <div class="contenedorColorElegido contenedorSpanAviso">
+                            <input type="color" id="colorElegido" value="#f5f5f5">
+                            <span class="spanAviso">Color elegido</span>
+                        </div>
+                    </div>
+                    <div class="divBtnCategorias">
+                        <button type="reset" id="cerrarNuevaCategoria">Cerrar</button>
+                        <button type="submit" id="crearCategoria">Crear</button>
+                    </div>
+                </form>
+            </div>
+            <div class="contenedorSeccionLateral">
+                <h3>Feriados</h3>
+                <div>
+                    <div class="feriados"><i class="fas fa-circle" style="color:#0072bb;"></i><h4>Feriados inamovibles</h4></div>
+                    <div class="feriados"><i class="fas fa-circle" style="color:#2e7d33;"></i><h4>Feriados trasladables</h4></div>
+                    <div class="feriados"><i class="fas fa-circle" style="color:#c1c1c1;"></i><h4>Días no laborables</h4></div>
+                    <div class="feriados"><i class="fas fa-circle" style="color:#6A1B99;"></i><h4>Turísticos</h4></div>
+                </div>
+            </div>
+        </aside>
+        <section id="bodyApp">
+            <div id="notas" class="seccionApp">
+            </div>
+            <div id="eventos" class="seccionApp">
+                <div id="contenedorFecha">
+                    <h3 class="fecha">
+                        <i class="fas fa-angle-left" id="fechaAnterior"></i>
+                        <span id="fecha"></span>
+                        <i class="fas fa-angle-right" id="fechaSiguiente"></i>
+                    </h3>
+                </div>
+            </div>
+        </section>
+        <aside id="calendario" class="calendarioOculto">
+            <div id="calendarioIcon">
+                <span class="fa-regular fa-calendar"></span>
+            </div>
+            <div class="calendario">
+                <div class="calendarioHeader">
+                    <button id="mesAnterior">
+                        <i class="fas fa-angle-left"></i>
+                    </button>
+                    <div>
+                        <h4 id="mesCalendario"></h4><span id="anioCalendario"></span>
+                        <div id="volverHoy">HOY</div>
+                    </div>
+                    <button id="mesSiguiente">
+                        <i class="fas fa-angle-right"></i>  
+                    </button>
+                </div>
+                <div class="calendarioDiasSemana">
+                    <span>Lun</span>
+                    <span>Mar</span>
+                    <span>Mié</span>
+                    <span>Jue</span>
+                    <span>Vie</span>
+                    <span>Sáb</span>
+                    <span>Dom</span>
+                </div>
+                <div id="calendarioDiasNumero" class="calendarioDiasNumero">
+                </div>
+            </div>
+        </aside>
+
+        <section id="crearNotaNueva" class="seccionCrearNuevo">
+            <a href="#"></a>
+            <div>
+                <h1>Nueva nota <a href="#" class="contenedorSpanAviso"><span class="spanAviso">Cerrar[Esc]</span><i class="fa fa-times"></i></a></h1>
+                <form class="formCrear" id="formNota">
+                    <input type="text" class="titulo" id="tituloNota" autocomplete="off" placeholder="Título">
+                    <textarea id="descripcionNota" autocomplete="off" placeholder="Descripción"></textarea>
+                    <div class="btnForm">
+                        <button type="reset">Restaurar</button>
+                        <button type="submit">Crear</button>
+                    </div>
+                </form>
+            </div>
+        </section> 
+        <section id="crearEventoNuevo" class="seccionCrearNuevo">
+            <a href="#"></a>
+            <div>
+                <h1>Nuevo evento <a href="#" class="contenedorSpanAviso"><span class="spanAviso">Cerrar[Esc]</span><i class="fa fa-times"></i></a></h1>
+                <form class="formCrear" id="formEvento">
+                    <input type="text" class="titulo" id="tituloEvento" autocomplete="off" placeholder="Título">
+                    <textarea id="descripcionEvento" autocomplete="off" placeholder="Descripción"></textarea>
+                    <div class="contenedorOpcionesASeleccionar">
+                        <h3>Categorías</h3>
+                        <input type="text" class="inputOpcionSeleccionada" id="categoriaEvento" value="Ninguna" disabled>
+                        <div class="opcionesASeleccionar" id="opcionesCategorias">
+                        </div>
+                    </div>
+                    <div class="fechaHora">
+                        <div>
+                            <h3>Fecha</h3>
+                            <input type="date" id="fechaEvento">
+                        </div>
+                        <div>
+                            <h3>Hora</h3>
+                            <input type="time" id="horaInicio"> 
+                            -
+                            <input type="time" id="horaFin">
+                            <div id="recordatorio" class="recordatorio contenedorSpanAviso">
+                                <span class="spanAviso">Recordatorio</span>
+                                <i id="recordatorioEvento" class="far fa-bell"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btnForm">
+                        <button type="reset">Restaurar</button>
+                        <button type="submit">Crear</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section id="detalleNota" class="seccionDetalle">
+            <a href="#"></a>
+            <div>
+                <a href="#" class="cerrarDetalle contenedorSpanAviso"><i class="fas fa-times"></i><span class="spanAviso">Cerrar[Esc]</span></a>
+                <input type="text" id="tituloNotaEditar" placeholder="(Sin título)" autocomplete="off">
+                <div id="descripcionNotaEditar" contenteditable="true" aria-multiline="true" dir="ltr"></div>
+            </div>
+        </section>
+        <section id="detalleEvento" class="seccionDetalle">
+            <a href="#"></a>
+            <div>
+                <a href="#" class="cerrarDetalle contenedorSpanAviso"><i class="fas fa-times"></i><span class="spanAviso">Cerrar[Esc]</span></a>
+                <input type="text" id="tituloEventoEditar" placeholder="(Sin título)" autocomplete="off">
+                <div id="descripcionEventoEditar" contenteditable="true" aria-multiline="true" dir="ltr"></div>
+                <div class="contenedorOpcionesASeleccionar">
+                    <h3>Categorías</h3>
+                    <input type="text" class="inputOpcionSeleccionada" id="categoriaEventoEditar" value="Ninguna" disabled>
+                    <div class="opcionesASeleccionar" id="opcionesCategoriasEditar">
+                    </div>
+                </div>
+                <div class="contenedorFechasEditar">
+                    <div>
+                        <h3>Fecha</h3>
+                        <input type="date" id="fechaEventoEditar">
+                    </div>
+                    <div>
+                        <h3>Hora</h3>
+                        <input type="time" id="horaInicioEditar"> 
+                        -
+                        <input type="time" id="horaFinEditar">
+                        <div class="recordatorio contenedorSpanAviso">
+                            <span class="spanAviso">Recordatorio</span>
+                            <i id="recordatorioEventoEditar" class="far fa-bell"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="temas" class="temas">
+            <a href="#"></a>
+            <div>
+                <h1>Elige el tema qué más te  guste<a href="#" class="contenedorSpanAviso"><span class="spanAviso">Cerrar[Esc]</span><i class="fa fa-times"></i></a></h1>
+                <div id="contenedorBtnTemas">
+                    <div class="contenedorSpanAviso"><button value="1" style="background: #5193fc;"><span class="spanAviso">Azul</span></button></div>
+                    <div class="contenedorSpanAviso"><button value="2" style="background: #d66140;"><span class="spanAviso">Naranja</span></button></div>
+                    <div class="contenedorSpanAviso"><button value="3" style="background: #edbf48;"><span class="spanAviso">Amarillo</span></button></div>
+                    <div class="contenedorSpanAviso"><button value="0" style="background: #1F2023;"><span class="spanAviso">Oscuro</span></button></div>
+                </div>
+            </div>
+        </section>
+
+        <div id="notificacion"></div>
+
+        <nav class="navMovil">
+            <ul>
+                <li><a href="#notas" class="seccionActual" id="seccionNotas2"><i class="far fa-sticky-note"></i>Notas</a></li>
+                <li><a href="#eventos" id="seccionEventos2"><i class="far fa-calendar-check"></i>Eventos</a></li>
+            </ul>
+        </nav>
+
+    </main>
+    <script src="scripts/Sortable.min.js"></script>
+    <script src="scripts/notas.js"></script>
+    <script src="scripts/eventos.js"></script>
+    <script src="scripts/index.js"></script>
+    <script src="scripts/dragDrop.js"></script>
+    <script src="scripts/calendario.js"></script>
+    <script src="scripts/temas.js"></script>
+</body>
+</html>
