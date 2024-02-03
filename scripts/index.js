@@ -254,6 +254,7 @@ function guardar(datosGuardar) {
     }
 }
 function mostrarNotas() {
+    BTN_CALENDARIO_ICON.style.display = 'none'
 
     notas = JSON.parse(localStorage.getItem('nota')) || []
     CONTENEDOR_NOTAS.innerHTML = ''

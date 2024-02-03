@@ -256,7 +256,7 @@ aside{
     padding: 30px;
     background: var(--first-background-color);
     position: sticky;
-    top: 70px;
+    top: 0;
 }
 aside:nth-child(1){
     border-right: 1px solid var(--border-color);
@@ -273,9 +273,8 @@ aside:nth-child(3){
 }
 .calendarioOculto{
     transform: translateX(100%); 
-    position:absolute; 
+    position: absolute; 
     right:0; 
-    top:0;
 }
 .calendarioVisible{
     transform: translateX(0);
@@ -691,7 +690,6 @@ nav ul li a:hover{
     margin: 30px;
     position: relative;
     overflow: hidden auto;
-    height: calc(100vh - 130px);
     display: flex;
     scroll-snap-type: x mandatory;
 }
@@ -1246,7 +1244,7 @@ nav ul li a:hover{
     }
 
     #calendario.calendarioVisible{
-        position: absolute;
+        position: fixed;
         right: 0;
         top: 0;
         transform: translateX(0); 
@@ -1273,17 +1271,18 @@ nav ul li a:hover{
 }
 
 @media all and (max-width: 768px) {
-
+    
     #notificacion{
         bottom: 80px;
         max-width: 90%;
     }
-
+    
     #notificacion span{
         width: 100%;
     }
-
+    
     main{
+        height: calc(100vh - 130px);
         overflow: hidden;
         scroll-padding-top: 20px;
     }
@@ -1320,7 +1319,7 @@ nav ul li a:hover{
 
     .calendarioOculto {
         transform: translateX(0);
-        transform: translateY(93%);
+        transform: translateY(100%);
         min-width: 100%;
     }
 
@@ -1335,9 +1334,6 @@ nav ul li a:hover{
     }
 
     #calendarioIcon {
-        position:absolute; 
-        right: 20px; 
-        top: -80px;
         background: var(--first-background-color);
         box-shadow: 0 5px 10px #00000010;
         height: 50px;
@@ -1347,8 +1343,16 @@ nav ul li a:hover{
         justify-content: center;
         align-items: center; 
         cursor: pointer;
+        transform: translate(0, -240px);
+        transition: .3s;
+        position: absolute;
+        border: 1px solid var(--border-color);
     }
     
+    .calendarioVisible #calendarioIcon {
+        transform: translate(0, -55px);
+    }
+
     .seccionCrearNuevo > div, .seccionDetalle > div, .temas > div{
         width: 90%;
     }
